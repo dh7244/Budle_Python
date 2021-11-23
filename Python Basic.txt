@@ -1,114 +1,116 @@
 [코드잇 프로그래밍 기초 in Python]
 
+
 1. 프로그래밍 시작하기
-    1) 코멘트
-        - # 이용해서 코멘트 표시. 코드에 영향을 주지 않음
-        - 용도 : 복잡한 코드 설명, 하다가 만 부분 표시, 다른 개발자와 소통
+1) 코멘트
+    - # 이용해서 코멘트 표시. 코드에 영향을 주지 않음
+    - 용도 : 복잡한 코드 설명, 하다가 만 부분 표시, 다른 개발자와 소통
 
-    2) 자료형 개요 (다른 프로그래밍 언어에서도 비슷하게 나타난다. 프로그래밍 공통사항)
-        - 파이썬으로 프로그래밍 할 때는 여러가지 자료를 이용할 수 있다.
-        - 숫자 : 정수(Integer)- 0,-1,1  /  소수(Floating Point)-1.0, 2.0
-        - 문자열(String) : "Hello", "World".   ex)"Hello" + "World" = "HelloWorld"
-        - 불린(Boolean) : 참과 거짓을 나타냄. 결과값은 True 혹은 False.  3 > 7 → False
-        - 리스트(list), 튜플(tuple) 등도 있음
+2) 자료형 개요 (다른 프로그래밍 언어에서도 비슷하게 나타난다. 프로그래밍 공통사항)
+    - 파이썬으로 프로그래밍 할 때는 여러가지 자료를 이용할 수 있다.
+    - 숫자 : 정수(Integer)- 0,-1,1  /  소수(Floating Point)-1.0, 2.0
+    - 문자열(String) : "Hello", "World".   ex)"Hello" + "World" = "HelloWorld"
+    - 불린(Boolean) : 참과 거짓을 나타냄. 결과값은 True 혹은 False.  3 > 7 → False
+    - 리스트(list), 튜플(tuple) 등도 있음
 
-    3) 추상화 개요 : 복잡한 것을 단순하게 만들어줌 (함수의 구동 원리를 몰라도 함수 이름만 알면 사용할 수 있음)
-        - 프로그래밍에서 추상화는 변수(Variable), 함수(Function), 객체(Object)의 세 단계로 볼 수 있음
-        - 변수(Variable) : 값을 저장하는 것
-            x = 254
-            y = 375
-            print(x + y)
-        - 함수(Function) : 명령을 저장하는 것. 예시) print 함수
+3) 추상화 개요 : 복잡한 것을 단순하게 만들어줌 (함수의 구동 원리를 몰라도 함수 이름만 알면 사용할 수 있음)
+    - 프로그래밍에서 추상화는 변수(Variable), 함수(Function), 객체(Object)의 세 단계로 볼 수 있음
+    - 변수(Variable) : 값을 저장하는 것
+        x = 254
+        y = 375
+        print(x + y)
+    - 함수(Function) : 명령을 저장하는 것. 예시) print 함수
 
-    4) 변수
-        - 변수란? 데이터를 어떤 공간에 담아서, 이름을 붙여주는 것
-        - 예시) 메뉴 가격 계산 (변수 사용 X)
-            print(4990)
-            print(4990 * 3 + 1490 * 2 + 1250 * 5)
-        - 변수를 안쓸 때 문제점 : 매번 값을 일일히 입력해야함, 실수할 가능성 높음, 코드를 이해하기 어려움, 수정하기 어려움
-        - 예시) 메뉴 가격 계산 (변수 사용)
-            burger_price = 4990   # burger_price를 정의함. "="는 지정연산자. 등호 오른쪽의 값을 등호 왼쪽 변수에 지정한다.
-            fries_price = 1490
-            drink_price = 1250
-            print(burger_price)
-            print(burger_price * 3 + fries_price * 2 + drink_price * 5)
+4) 변수
+    - 변수란? 데이터를 어떤 공간에 담아서, 이름을 붙여주는 것
+    - 예시) 메뉴 가격 계산 (변수 사용 X)
+        print(4990)
+        print(4990 * 3 + 1490 * 2 + 1250 * 5)
+    - 변수를 안쓸 때 문제점 : 매번 값을 일일히 입력해야함, 실수할 가능성 높음, 코드를 이해하기 어려움, 수정하기 어려움
+    - 예시) 메뉴 가격 계산 (변수 사용)
+        burger_price = 4990   # burger_price를 정의함. "="는 지정연산자. 등호 오른쪽의 값을 등호 왼쪽 변수에 지정한다.
+        fries_price = 1490
+        drink_price = 1250
+        print(burger_price)
+        print(burger_price * 3 + fries_price * 2 + drink_price * 5)
 
-    5) 실습과제 : 칼로리 계산기
-        # 과자별 칼로리 변수 정의
-        kitkat = 190
-        oreos = 502
-        pringles = 292
-        twix = 135.9
-        cheetos = 485
+5) 실습과제 : 칼로리 계산기
+    # 과자별 칼로리 변수 정의
+    kitkat = 190
+    oreos = 502
+    pringles = 292
+    twix = 135.9
+    cheetos = 485
 
-        # 다양한 과자 조합
-        print(kitkat + oreos * 2)
-        print(cheetos * 4)
-        print(pringles + oreos + twix)
-        print(pringles * 3 + oreos * 2)
+    # 다양한 과자 조합
+    print(kitkat + oreos * 2)
+    print(cheetos * 4)
+    print(pringles + oreos + twix)
+    print(pringles * 3 + oreos * 2)
 
-    6) 함수
-        - 명령을 저장. 복잡한 디테일을 알 필요 없이, 어떻게 쓰는지만 알면 된다.
-        - 내장함수 : 기본으로 제공되는 함수  예시)print 함수
-        - 예시)
-            def hello():   # 함수 정의의 첫줄 : 함수의 헤더
-                print("Hello!")
-                print("Welcome to Codeit!")
-
-
-            hello()   # 함수 호출
-
-    7) 실습과제 : 카페모카 레시피
-        def cafe_mocha_recipe():
-            print(""""1. 준비된 컵에 초코 소스를 넣는다.   # 따옴표 3개를 쓰면 여러줄 문자열을 그대로 출력
-        2. 에스프레소를 추출하고 잔에 부어 준다.
-        3. 초코 소스와 커피를 잘 섞어 준다.
-        4. 거품기로 우유 거품을 내고, 잔에 부어 준다.
-        5. 생크림을 얹어 준다.""")
+6) 함수
+    - 명령을 저장. 복잡한 디테일을 알 필요 없이, 어떻게 쓰는지만 알면 된다.
+    - 내장함수 : 기본으로 제공되는 함수  예시)print 함수
+    - 예시)
+        def hello():   # 함수 정의의 첫줄 : 함수의 헤더
+            print("Hello!")
+            print("Welcome to Codeit!")
 
 
-        cafe_mocha_recipe()
+        hello()   # 함수 호출
 
-    8) 파라미터
-        - 함수에 넘겨주는 값
-        - 파라미터에 따라 함수가 다르게 동작하게 할 수 있음
-        - 예시)
-            def hello(name):
-                print("Hello")
-                print(name)
-
-
-            hello("Chris")
-
-    9) 여러 개의 파라미터
-        - 한 함수에 여러 개의 파라미터를 전달하기
-        - 예시)
-            def print_sum(num_1, num_2, num_3):
-                print(num_1 + num_2 + num_3)
+7) 실습과제 : 카페모카 레시피
+    def cafe_mocha_recipe():
+        print(""""1. 준비된 컵에 초코 소스를 넣는다.   # 따옴표 3개를 쓰면 여러줄 문자열을 그대로 출력
+    2. 에스프레소를 추출하고 잔에 부어 준다.
+    3. 초코 소스와 커피를 잘 섞어 준다.
+    4. 거품기로 우유 거품을 내고, 잔에 부어 준다.
+    5. 생크림을 얹어 준다.""")
 
 
-            print_sum(7, 3, 2)
+    cafe_mocha_recipe()
 
-    10) 실습과제 : 세 수의 곱
-        def multiply_three_numbers(num_1, num_2, num_3):
-            print(num_1 * num_2 * num_3)
-
-
-        multiply_three_numbers(7, 3, 5)
-
-    11) return문
-        - 함수가 어떤 값을 돌려주는 것 (함수가 값을 반환)
-        - 예시)
-            def get_square(x):
-                return x * x
+8) 파라미터
+    - 함수에 넘겨주는 값
+    - 파라미터에 따라 함수가 다르게 동작하게 할 수 있음
+    - 예시)
+        def hello(name):
+            print("Hello")
+            print(name)
 
 
-            y = get_square(3)
-            print(y)
+        hello("Chris")
+
+9) 여러 개의 파라미터
+    - 한 함수에 여러 개의 파라미터를 전달하기
+    - 예시)
+        def print_sum(num_1, num_2, num_3):
+            print(num_1 + num_2 + num_3)
+
+
+        print_sum(7, 3, 2)
+
+10) 실습과제 : 세 수의 곱
+    def multiply_three_numbers(num_1, num_2, num_3):
+        print(num_1 * num_2 * num_3)
+
+
+    multiply_three_numbers(7, 3, 5)
+
+11) return문
+    - 함수가 어떤 값을 돌려주는 것 (함수가 값을 반환)
+    - 예시)
+        def get_square(x):
+            return x * x
+
+
+        y = get_square(3)
+        print(y)
+
 
 
 2. 프로그래밍 핵심 개념
-    1) 숫자형
+1) 숫자형
 
 
 
