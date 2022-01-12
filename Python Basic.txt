@@ -110,7 +110,7 @@
 
 
 2. 프로그래밍 핵심 개념
-1) 숫자형
+1) 자료형 : 숫자형
     - 각 숫자형끼리의 연산 결과값의 형
         - 정수형&정수형 연산 => 정수형
         - 소수형&소수형 연산 => 소수형
@@ -128,7 +128,7 @@
         print(round(3.141592))  # 반올림 : round 함수
         print(round(3.141592), 2)  # 소숫점 2째자리에서 반올림
 
-2) 문자열(String)
+2) 자료형 : 문자열(String)
     - 따옴표(''), 큰따옴표("")로 문자열 만들 수 있음
     - 문자열의 연산
         print("코드잇" + "유재석")  # 코드잇유재석
@@ -138,6 +138,239 @@
         print('I'm excited to learn Python!')  # Syntax 오류
         print("I'm excited to learn Python!")  # 큰따옴표로 바꿈
         print('I\'m excited to learn Python!')  # 역슬래시(\) 이용
+
+3) 자료형 : 형 변환(Type Conversion or Type Casting)
+    - 값을 어떤 자료형에서 다른 자료형으로 변환
+    - 예시
+        print(int(3.8))
+        print(float(3))
+        print(int("2") + int("5"))
+        print(float("1.1") + float("2.5"))
+        print(str(2) + str(5))
+    - 예시2
+        age = 7
+        print("제 나이는 " + age + "살입니다.")  # 오류 : 문자형과 숫자형 연결 불가
+        print("제 나이는 " + str(age) + "살입니다.")
+
+4) 자료형 : format 이용한 문자열 formatting
+    - 예시) 오늘은 2019년 10월 29일입니다. ← 출력하기
+        year = 2019
+        month = 10
+        day = 29
+        print("오늘은" + str(year) + "년" + str(month) + "월" + "str(day) + "일입니다.") → 매우 번거롭고 복잡함
+        print("오늘은 {}년 {}월 {}일입니다.".format(year, month, day)) → format 활용
+    - format 다루기
+        # 순서바꾸기
+        print("저는 {},{},{}를 좋아합니다.".format("박지성", "유재석", "빌게이츠"))
+        print("저는 {1},{0},{2}를 좋아합니다.".format("박지성", "유재석", "빌게이츠"))
+
+        # 소숫점 2번째 자리에서 반올림
+        num_1 = 1
+        num_2 = 3
+        print("{0} 나누기 {1}은 {2}입니다.".format(num_1, num_2, num_1 / num_2))
+        print("{0} 나누기 {1}은 {2:.2f}입니다.".format(num_1, num_2, num_1 / num_2))
+
+    - format과 유사한 방식들
+        가장 오래된 방식 (% 기호) : %s, %d와 같은 '포맷 스트링'을 사용. C나 자바 등 많은 언어에서 유사한 방식 사용
+        name = "최지웅"
+        age = 32
+        print("제 이름은 %이고 %d살입니다." % (name, age))
+
+        현재 가장 많이 쓰이는 방식 (format 메소드) : 현재 가장 많이 사용하는 방식
+        name = "최지웅"
+        age = 32
+        print("제 이름은 {}이고 {}살입니다.".format(name, age))
+
+        새로운 방식 (f-string) : 파이썬 3.6부터 새롭게 나온 방식.
+        name = "최지웅"
+        age = 32
+        print(f"제 이름은 {name}이고 {age}살입니다.")
+
+5) 자료형 : 불 대수, 불린(Boolean)
+    - 불 대수 : 일상적인 논리를 수학적으로 표현한 것.
+    - 불 대수에서 사용하는 값 = 진리값 (True or False)
+    - 불 대수의 연산 : AND OR NOT
+        - AND 연산 : x와 y가 모두 참일 때만 x AND y가 참
+        - OR 연산 : x와 y 중 하나라도 참이면 x OR y는 참
+        - NOT 연산 : x가 참이면 NOT x는 거짓. x가 거짓이면 NOT x는 참
+    - 명제 : 참과 거짓이 확실한 문장
+    - 예시
+        print(2 > 1)
+        print(4 <= 3)
+        print(2 == 2)
+        print(2 != 2)
+        print("Hello" == "Hello")
+        print(2 > 1 and "Hello" == "Hello")
+        print(7 == 7 or (4 < 3 and 12 > 10))
+    ※ type 함수 : 쓰고 있는 값이 어떤 자료형인지 확인할 수 있는 함수
+        print(type(3))
+        print(type("3"))
+        print(type(True))
+
+6) 추상화 : 변수/함수/return문/옵셔널 파라미터/Scope/상수/스타일
+    - 변수 : 파이썬에서 등호(=)는 지정연산자(Assignment Operator)로, 오른쪽의 값을 왼쪽 변수에 지정한다는 의미
+    - 함수의 실행순서 : 함수를 호출한다 = 함수는 실행한다는 의미
+        def hello():
+        print("Hello!")
+        print("Welcome to Codeit")
+
+        print("함수 호출 전")
+        hello()
+        print("함수 호출 후")
+    - return문
+        - return문의 역할 : 1) 값 돌려주기  2) 함수 즉시 종료하기
+        - 예시
+            def square(x):
+            print("함수 시작")
+            return x*x
+            print("함수 끝")  # return문은 함수를 종료시키므로 도달 불가. dead code가 됨.
+        - return문과 print문의 차이
+            def print_square(x):
+                print(x * x)
+
+            def get_square(x):
+                return x * x
+
+            print_square(3)
+            get_square(3)  # 출력이 되지 않음
+            print(get_square(3))
+            print(print_square(3))  # return값이 없으므로 None이 됨.
+
+    - 옵셔널 파라미터(Optional parameter)
+        - 파라미터에 기본값(default value)을 설정할 수 있음. 기본값을 설정해두면 함수 호출 시 파라미터에 값을 안넘겨줘도 됨.
+        - 옵셔널 파라미터는 꼭 마지막에 넣어야 한다.
+        - 예시
+            def myself(name, age, nationality="한국"):
+                print("내 이름은 {}".format(name))
+                print("나이는 {}".format(age))
+                print("국적은 {}".format(nationality))
+
+            myself("코드잇", 1, "미국")
+            myself("코드잇", 1)
+
+    - Syntactic Sugar : 자주 쓰이는 표현을 더 간략하게 쓸 수 있도록 하는 문법
+        x = x + 1
+        x += 1
+
+        x = x * 2
+        x *= 2
+
+    - Scope(범위)
+        - 모든 변수에는 Scope라 하여, 해당 변수를 사용할 수 있는 범위가 지정된다.
+        - 로컬 변수 : 변수를 정의한 함수 내에서만 사용 가능
+        - 글로벌 변수 : 모든 곳에서 사용 가능
+        - 함수에서 변수를 사용하고 나면, 로컬 변수를 먼저 찾고 나서, 없는 경우 글로벌 변수를 찾음
+        - 예시 1)
+            def my_function():
+                x = 3
+                print(x)
+
+
+            my_function()
+            print(x)   # 오류. 함수 내에서 정의한 변수 x는 로컬 변수로, 함수 내에서만 사용 가능. 변수 x의 scope는 이 함수에 한정
+        - 예시 2)
+            x = 2
+
+            def my_function():
+                print(x)
+
+            my_function()   # x는 글로벌 변수로, 이 프로그램 전체에서 사용 가능
+        - 예시 3)
+            x = 2   # 글로벌 변수
+
+            def my_function():
+                x = 3   # 로컬 변수
+                print(x)
+
+            my_function()   # 함수 내에서 먼저 변수를 찾고 없으면 글로벌 변수를 찾기 때문에, 3이 출력됨
+            print(x)   # 글로벌 변수인 2가 출력됨.
+
+    - 상수(Constant)
+        - 일반적으로 상수는 모든 문자를 대문자로 설정(일반 변수와 쉽게 구분, 실수 방지)
+        - 예시 : PI = 3.14  (원주율 파이는 상수이므로 대문자로 표기)
+
+    - 스타일
+        - 이해하기 쉬운 코드를 사용해야한다.
+        - 파이써에서 가장 많이 사용되는 스타일 가이드 : PEP8
+        - 자주 쓰이는 몇가지 규칙
+            - 이름 : 변수/함수 이름은 소문자, 상수 이름은 대문자. 여러 단어일 경우 _로 구분. 의미를 알 수 있는 이름 사용
+            - 화이트 스페이스
+                - 들여쓰기는 스페이스*4개
+                - 함수 정의 위아래로 빈 줄 2개씩
+                - 괄호 바로 안에는 띄어쓰기 X
+                - 쉼표 앞에는 띄어쓰기 X
+                - 지정 연산자 앞뒤로 띄어쓰기 1칸
+                - 연산자 앞뒤로 띄어쓰기 1칸
+                - 단, 연산 우선순위 강조 시에는 붙여쓰기
+                - 일반 코드와 같은 줄에 코멘트 쓸 경우 코멘트 앞에 최소 2칸 띄어쓰기
+
+7) 제어문
+    - While 반복문의 구조/문법
+        - 구조
+            while 조건부분:
+                실행부분
+        - 조건부분 : 불린 값으로 계산되는 식
+        - 실행부분 : 반복적으로 실행하고 싶은 명령. 조건 부분이 True면 실행부분이 실행된다.
+        - 예시
+            i = 1
+            while 2 * i <= 100:
+                print(i * 2)
+                i += 1
+    - if문 구조/문법
+        - 구조
+            if 조건부분:
+                실행부분
+            else:
+                실행부분   → if의 조건부분이 False면 실행된다.
+        - 예시
+            temp = 16
+            if temp <= 10:
+                print("자켓을 입는다")
+            else:
+                print("자켓을 입지 않는다.")
+    - elif문
+        - else:
+            if ~  를 대체한다.
+        - 예시
+            def print_grade(midterm_score, final_score):
+                total = midterm_score + final_score
+                if total >= 90:
+                    print("A")
+                elif total >= 80:
+                    print("B")
+                elif total >= 70:
+                    print("C")
+                elif total >= 60:
+                    print("D")
+                else:
+                    print("F")
+
+    - break문, continue문
+        - break문 : while문에서 조건 부분과 상관 없이 반복문에서 나올 때 사용
+        - 예시(100 이상이고 23의 배수인 최소의 정수 찾기)
+            i = 100
+
+            while True:
+                if i % 23 == 0:
+                    break
+                i = i + 1
+
+            print(i)
+        - continue문 : 현재 진행되고 있는 수행 부분을 중단하고 바로 조건 부분을 확인
+        - 예시(15 이하 짝수 출력)
+            i = 0
+
+            while i < 15:
+                i = i + 1
+                if i % 2 == 1:
+                    continue
+                print(i)
+
+
+
+3. 프로그래밍과 데이터
+1) 리스트
+
 
 
 
