@@ -446,7 +446,92 @@
         - 정렬은 어느상황에나 절대적으로 좋은 방법은 없으며, 상황에 따라 각 알고리즘의 장단점이 있음.
             거의 정렬된 리스트 정렬 시 삽입정렬이 가장 빠름, 무작위 리스트는 힙정렬(Heapsort),
             정반대로 정렬된 리스트는 삽입정렬이 가장 느림, 선택정렬과 합병정렬(Merge Sort)는 상황에 무관하게 소요 시간 일정
-    - 알고리즘 평가법
+3) 알고리즘 평가법
+    - 평가의 두 기준 : 시간과 공간(메모리). 빠르고 메모리를 적게 차지하는 프로그램이 좋은 프로그램.
+    - 시간복잡도(Time complexity)
+        - 알고리즘 평가를 위해 프로그램 구동 시간을 재는 방법은 컴퓨터 성능, 프로그래밍 언어 등 다양한 환경 따라 달라지기 때문에 불합리
+        - 시간복잡도는 데이터가 많아질수록 걸리는 시간이 얼마나 급격하게 증가하는가를 나타내는 개념
+            인풋 크기가 10→20→100으로 증가할 때, 알고리즘A는 걸리는 시간이 10→20→100초로, B는 10→40→1000초로 증가한다면,
+             알고리즘B의 시간복잡도가 크다. 알고리즘A가 더 빠른 알고리즘.
+        - 관련 수학지식
+            - loga(b) : b를 a로 몇번 나누어야 1이 되는가. log2(16) : 길이가 16인 리스트를 4번 절반으로 나눠야 길이 1이 된다.
+            - 1~n까지의 합 = n(n+1)/2
+    - 점근표기법(Big-O Notation)
+        - 알고리즘의 실행시간을 인풋 크기(n)에 대한 수식으로 나타낼 수 있음. (인풋 크기가 클수록 알고리즘 실행시간이 오래 걸림)
+           단, 이 수식의 계수들은 컴퓨터 성능, 언어 등에 따라 달라지기 때문에 "점근 표기법"을 사용.
+        - 인풋 크기(n)이 매우 크다고 가정하고 n의 최대 차수만 따짐. (인풋 크기가 작을 때는 알고리즘 따라 시간차가 별로 안난다.)
+           알고리즘 소요시간이 n에 비례하는지, n^2에 비례하는지, lg(n)에 비례하는지
+        - 읽는 방법 : O(n^2) = Big-O of n^2 알고리즘
+        - 컴퓨터 성능이 좋고, 언어가 효율적이어도 알고리즘이 가장 중요하다.
+        - 탐색 알고리즘 평가하기
+            - 선형 탐색 : O(n)
+                def linear_search(element, some_list):
+                    i = 0                               ←O(1)
+                    n = len(some_list)                  ←O(1)
+                    while i < n:                        ←반복문:O(n)  (최악의 경우 O(1)을 n번 반복)
+                        if element == some_list[i]:
+                            return i
+                        i += 1
+                    return None
+            - 이진 탐색 : O(lg(n))
+                def binary_search(element, some_list):
+                    start_index = 0                                ←O(1)
+                    end_index = len(some_list) - 1                 ←O(1)
+                    while start_index <= end_index:                ←반복문:O(lg(n)) (최악의 경우 O(1)을 lg(n)번 반복)
+                        midpoint = (start_index + end_index) // 2
+                        if some_list[midpoint] == element:
+                            return midpoint
+                        elif some_list[midpoint] > element:
+                            end_index = midpoint - 1
+                        else:
+                            start_index = midpoint + 1
+                    return None
+        - n에 특별한 의미는 없음. 인풋 크기를 나타내는 흔한 문자
+           리스트가 아닌 트리, 그래프 같은 인풋이 들어올 수도 있음.
+           예를 들어 그래프의 경우 꼭짓점(vertex)의 갯수 V, 변(edge)의 갯수 E라 할때,
+           두 꼭짓점 사이 최단 경로 찾는 BFS 알고리즘의 시간 복잡도는 O(V+E)와 같이 표현
+    - 파이썬 대표적인 내장함수의 시간복잡도
+        - List Operation
+            (Operation : Code : Average Case)
+            인덱싱 :	my_list[index] : O(1)
+            정렬	: my_list.sort(), sorted(my_list) :	O(nlgn)
+            뒤집기 :	my_list.reverse() :	O(n)
+            탐색 : element in my_list : O(n)
+            끝에 요소 추가	: my_list.append(element) : O(1)
+            중간에 요소 추가 :	my_list.insert(index, element) : O(n)
+            삭제	: del my_list[index] : O(n)
+            최솟값, 최댓값 찾기 : min(my_list), max(my_list) : O(n)
+            길이 구하기 : len(my_list) : O(1)
+            슬라이싱 : my_list[a:b] : O(b - a)   (슬라이싱 범위의 길이에 비례)
+        - Dictionary Operation
+            (Operation : Code : Average Case)
+            값 찾기 : my_dict[key] : O(1)
+            값 넣어주기/덮어쓰기 : my_dict[key] = value : O(1)
+            값 삭제 : del my_list[key] : O(1)
+    - 일반적인 시간복잡도
+        - O(1) : 반복문 없으면 대체로 O(1)
+        - O(lgn) : 예시-2의 거듭제곱을 출력하는 함수
+            def print_powers_of_two(n):
+                i = n
+                while i > 1:
+                    print(i)
+                    i = i / 2
+        - O(n) : 일반적으로 반복문이 있고, 반복 횟수가 인풋 크기에 비례할 때
+        - O(nlgn) : 반복문 2개가 중첩되었는데, 하나는 n에, 하나는 lgn에 비례할 때
+        - O(n^2) : 반복문 안에 반복문이 있을 때
+        - O(n^3) : 반복문 세 번 중첩
+        - 그 외 : O(n^4), O(2^n), O(n!) 등
+    - 공간 복잡도(Space Complexity)
+        - 인풋 크기에 비례해서 알고리즘이 사용하는 메모리 공간 크기
+        - 마찬가지로 Big-O 표기법을 사용할 수 있음.
+        - 예시 : O(n^2)의 공간복잡도를 가지는 함수
+            def largest_product(my_list):
+                products = []
+                for a in my_list:                   →O(1) : 정수 1개 담아둠
+                    for b in my_list:               →O(1) : 정수 1개 담아둠
+                        products.append(a * b)
+                                                    →O(n^2) : products에 my_list의 가능한 모든 조합의 곱이 들어감
+                return max(products)
 
 
 
