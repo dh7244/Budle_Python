@@ -1,9 +1,24 @@
-# Python 기초
-print("코드잇" + "유재석")
-print("3" + "5")
-print("Hello" * 3)
+# 알고리즘
 
-# 문자열 안에 따옴표가 포함되는 경우
-print('I'm excited to learn Python!')  # Syntax 오류
-print("I'm excited to learn Python!")  # 큰따옴표로 바꿈
-print('I\'m excited to learn Python!')  # 역슬래시(\) 이용
+
+def binary_search(element, some_list):
+    some_list.sort()
+    start_index = 0
+    end_index = len(some_list) - 1
+    while start_index <= end_index:
+        midpoint = (start_index + end_index) // 2
+        if some_list[midpoint] == element:
+            return midpoint
+        elif some_list[midpoint] > element:
+            end_index = midpoint - 1
+        else:
+            start_index = midpoint + 1
+    return None
+
+
+
+print(binary_search(2, [2, 3, 5, 7, 11]))
+print(binary_search(0, [2, 3, 5, 7, 11]))
+print(binary_search(5, [2, 3, 5, 7, 11]))
+print(binary_search(3, [2, 3, 5, 7, 11]))
+print(binary_search(11, [2, 3, 5, 7, 11]))
