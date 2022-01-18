@@ -1,15 +1,21 @@
 # 알고리즘
 
-# 이진탐색 재귀로 구현하기
-def binary_search(element, some_list, start_index=0, end_index=None):
-    # end_index가 따로 주어지지 않은 경우에는 리스트의 마지막 인덱스
-    if end_index == None:
-        end_index = len(some_list) - 1
+def move_disk(disk_num, start_peg, end_peg):
+    print("%d번 원판을 %d번 기둥에서 %d번 기둥으로 이동" % (disk_num, start_peg, end_peg))
 
-    # 코드를 작성하세요.
+def hanoi(num_disks, start_peg, end_peg):
+    # 코드를 입력하세요.
+    temp_peg = 6 - (start_peg + end_peg)
+    if num_disks == 1:
+        move_disk(num_disks, start_peg, end_peg)
+    else:
+        hanoi(num_disks-1, start_peg, temp_peg)
+        move_disk(num_disks, start_peg, end_peg)
+        hanoi(num_disks-1, temp_peg, end_peg)
 
-print(binary_search(2, [2, 3, 5, 7, 11]))
-print(binary_search(0, [2, 3, 5, 7, 11]))
-print(binary_search(5, [2, 3, 5, 7, 11]))
-print(binary_search(3, [2, 3, 5, 7, 11]))
-print(binary_search(11, [2, 3, 5, 7, 11]))
+
+# 테스트 코드 (포함하여 제출해주세요)
+hanoi(3, 1, 3)
+
+
+
