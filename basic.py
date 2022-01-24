@@ -1,21 +1,16 @@
 # 알고리즘
 
-def move_disk(disk_num, start_peg, end_peg):
-    print("%d번 원판을 %d번 기둥에서 %d번 기둥으로 이동" % (disk_num, start_peg, end_peg))
+# 제곱근 사용을 위한 sqrt 함수
+from math import sqrt
 
-def hanoi(num_disks, start_peg, end_peg):
-    # 코드를 입력하세요.
-    temp_peg = 6 - (start_peg + end_peg)
-    if num_disks == 1:
-        move_disk(num_disks, start_peg, end_peg)
-    else:
-        hanoi(num_disks-1, start_peg, temp_peg)
-        move_disk(num_disks, start_peg, end_peg)
-        hanoi(num_disks-1, temp_peg, end_peg)
+# 두 매장의 직선 거리를 계산해 주는 함수
+def distance(store1, store2):
+    return sqrt((store1[0] - store2[0]) ** 2 + (store1[1] - store2[1]) ** 2)
 
+# 가장 가까운 두 매장을 찾아주는 함수
+def closest_pair(coordinates):
+    # 여기 코드를 쓰세요
 
-# 테스트 코드 (포함하여 제출해주세요)
-hanoi(3, 1, 3)
-
-
-
+# 테스트
+test_coordinates = [(2, 3), (12, 30), (40, 50), (5, 1), (12, 10), (3, 4)]
+print(closest_pair(test_coordinates))
