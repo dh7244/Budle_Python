@@ -1,16 +1,14 @@
 # 알고리즘
 
-# 제곱근 사용을 위한 sqrt 함수
-from math import sqrt
+def consecutive_sum(start, end):
+    if start == end:
+        return start
+    mid = (start + end) // 2
+    return consecutive_sum(start, mid) + consecutive_sum(mid + 1, end)
 
-# 두 매장의 직선 거리를 계산해 주는 함수
-def distance(store1, store2):
-    return sqrt((store1[0] - store2[0]) ** 2 + (store1[1] - store2[1]) ** 2)
-
-# 가장 가까운 두 매장을 찾아주는 함수
-def closest_pair(coordinates):
-    # 여기 코드를 쓰세요
 
 # 테스트
-test_coordinates = [(2, 3), (12, 30), (40, 50), (5, 1), (12, 10), (3, 4)]
-print(closest_pair(test_coordinates))
+print(consecutive_sum(1, 10))
+print(consecutive_sum(1, 100))
+print(consecutive_sum(1, 253))
+print(consecutive_sum(1, 388))
