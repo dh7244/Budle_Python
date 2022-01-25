@@ -699,6 +699,132 @@
 
             # 각 부분 문제를 재귀적으로 풀고(Conquer), 부분 문제의 답을 서로 더한다(Combine).
             return consecutive_sum(start, mid) + consecutive_sum(mid + 1, end)
+    - 합병정렬(Merge Sort) - 정렬 알고리즘
+        - 합병정렬 : Divide & Conquer 알고리즘
+            Divide : 리스트를 반으로 나눈다.
+            Conquer : 왼쪽 리스트와 오른쪽 리스트를 각각 정렬한다.
+            Combine : 정렬된 두 리스트를 하나의 정렬된 리스트로 합병한다.
+                      각 리스트에서 가장 왼쪽에 있는 수끼리 계속 비교하여 작은 것을 넣는다. 마지막에 남는 수들은 그대로 넣는다.
+        - 재귀적 개념으로 이해하기
+            Base case : 리스트의 요소가 1개일 때. 이미 그대로 정렬되었다고 볼 수 있음.
+            Recursive case : 각 리스트의 가장 왼쪽 값을 비교하여 작은 값을 택한다.
+        - 예시) 합병 정렬 구현하기
+            - 해답
+                # merge 함수 정의 : 두 정렬된 리스트를 인풋으로 받아 정렬된 리스트로 합쳐 리턴
+                def merge(list1, list2):
+                    i = 0
+                    j = 0
+                    # 정렬된 항목들을 담을 리스트
+                    merged_list = []
+                    # list1과 list2를 돌면서 merged_list에 항목 정렬
+                    while i < len(list1) and j < len(list2):
+                        if list1[i] > list2[j]:
+                            merged_list.append(list2[j])
+                            j += 1
+                        else:
+                            merged_list.append(list1[i])
+                            i += 1
+                    # list2에 남은 항목이 있으면 정렬 리스트에 추가
+                    if i == len(list1):
+                        merged_list += list2[j:]
+                    # list1에 남은 항목이 있으면 정렬 리스트에 추가
+                    elif j == len(list2):
+                        merged_list += list1[i:]
+                    return merged_list
+                # 합병 정렬 함수 정의
+                def merge_sort(my_list):
+                    # base case
+                    if len(my_list) < 2:
+                        return my_list
+                    # my_list를 반씩 나눈다(divide)
+                    left_half = my_list[:len(my_list)//2]    # 왼쪽 반
+                    right_half = my_list[len(my_list)//2:]   # 오른쪽 반
+                    # merge_sort 함수를 재귀적으로 호출하여 부분 문제 해결(conquer)하고,
+                    # merge 함수로 정렬된 두 리스트를 합쳐(combine)준다
+                    return merge(merge_sort(left_half), merge_sort(right_half))
+            - 내가 쓴 코드
+                # merge 함수 정의
+                def merge(list1, list2):
+                    list_merge = []
+                    while True:
+                        if len(list1) == 0 or len(list2) == 0:
+                            break
+                        elif list1[0] <= list2[0]:
+                            list_merge.append(list1[0])
+                            del list1[0]
+                        elif list1[0] > list2[0]:
+                            list_merge.append(list2[0])
+                            del list2[0]
+                    return list_merge + list1 + list2
+                # 합병 정렬
+                def merge_sort(my_list):
+                    mid = len(my_list) // 2
+                    left_list = my_list[:mid]
+                    right_list = my_list[mid + 1:]
+                    if len(my_list) <= 1:
+                        return my_list
+                    return merge(merge_sort(my_list[:mid]), merge_sort(my_list[mid:]))
+    - 퀵 정렬(Quick Sort)
+        - 퀵 정렬 : Divide & Conquer 알고리즘
+            Divide : 파티션(Partition) 과정. pivot(기준값. 편의상 마지막 값)을 정하고,
+                     pivot보다 작은 값은 pivot 왼쪽에, 큰 값은 pivot 오른쪽에 배치
+            Conquer : pivot 왼쪽의 리스트와 pivot 오른쪽의 리스트를 각각 정렬한다.(재귀적으로)
+            Combine : 할 일 없음
+        - 재귀적 관점으로 검토
+            Base Case : 리스트의 요소가 1개일 때.
+            Recursive Case : 각 리스트에서 pivot을 정하고, pivot보다 작은 값은 왼쪽에, 큰 값은 오른쪽에 배치한다.
+        - Partition 과정 : my_list, start, end를 인풋으로 받음. p(pivot) = end.
+                          p보다 작은 그룹, 큰 그룹, 아직 모르는 그룹으로 나눠, 각 그룹이 시작되는 인덱스를 계속 조정한다.
+                          Small 그룹 인덱스 : 0, Big 그룹 인덱스 : b, Unknown 그룹 인덱스 : i.
+                          반복문에서 i += 1씩 해가며, 각 요소와 b, i의 크기를 조정. i=p가 될때, p와 b 위치의 요소를 바꾸고 함수 종료.
+        - 퀵 정렬 함수 만들기
+            #Divide: partition 과정을 통해, pivot을 기준으로 리스트를 나눈다.
+            #Conquer: pivot 왼쪽 부분과 pivot 오른쪽 부분을 각각 quicksort 함수로 정렬한다.
+            #Combine: 따로 할 게 없다!
+
+            # 두 요소의 위치를 바꿔주는 helper function
+            def swap_elements(my_list, index1, index2):
+                temp = my_list[index1]
+                my_list[index1] = my_list[index2]
+                my_list[index2] = temp
+
+            # 퀵 정렬에서 사용되는 partition 함수
+            def partition(my_list, start, end):
+                # 리스트 값 확인과 기준점 이하 값들의 위치 확인을 위한 변수 정의
+                i = start
+                b = start
+                p = end
+                # 범위안의 모든 값들을 볼 때까지 반복문을 돌린다
+                while i < p:
+                    # i 인덱스의 값이 기준점보다 작으면 i와 b 인덱스에 있는 값들을 교환하고 b를 1 증가 시킨다
+                    if my_list[i] <= my_list[p]:
+                        swap_elements(my_list, i, b)
+                        b += 1
+                    i += 1
+                # b와 기준점인 p 인덱스에 있는 값들을 바꿔준다
+                swap_elements(my_list, b, p)
+                p = b
+                # pivot의 최종 인덱스를 리턴해 준다
+                return p
+
+            # 퀵 정렬 : 새로운 리스트를 따로 리턴해주는게 아니고, quicksort 함수로 정렬만 하는 것.
+            def quicksort(my_list, start=0, end=None):
+                if end == None:
+                    end = len(my_list) - 1
+                # base case
+                if end - start < 1:
+                    return
+                # my_list를 두 부분으로 나누어주고,
+                # partition 이후 pivot의 인덱스를 리턴받는다
+                pivot = partition(my_list, start, end)
+                # pivot의 왼쪽 부분 정렬
+                quicksort(my_list, start, pivot - 1)
+                # pivot의 오른쪽 부분 정렬
+                quicksort(my_list, pivot + 1, end)
+
+3) Dynamic Programming
+
+
 
 
 
