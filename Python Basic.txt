@@ -861,7 +861,70 @@
                         fib_table.append(fib_table[i - 1] + fib_table[i - 2])
                     # 피보나치 n번째 수를 리턴한다
                     return fib_table[n]
+                - 시간복잡도 : O(n), 공간복잡도 : O(n). Dynamic Programming 통해 효율적 코드가 되었음.
+        - Dynamic Programming의 공간최적화 : 모든 값을 저장할 필요가 없는 경우에는 Cache를 다 쓸 필요 없이,
+                                          변수 2개에 필요한 값만 계속 저장하여 공간복잡도를 O(1)로 만들 수 있음.
+                - 예시) Tabulation 이용한 피보나치 수열 : Current와 Previous의 두 변수만 사용하여 구현할 수 있음.
+                    def fib_optimized(n):
+                        previous = 0
+                        current = 1
+                        i = 1
+                        while i < n:
+                            current, previous = previous + current, current
+                            i += 1
+                        return current
+    - 예시) 새콤달콤 판매 최대 이득 구하기 : Memoization
+        (인풋)
+            price_list: 개수별 가격이 정리되어 있는 리스트
+            count: 판매할 새꼼달꼼 개수
+            cache: 개수별 최대 수익이 저장되어 있는 사전
+        def max_profit_memo(price_list, count, cache):
+            # Base case
+            if count < 2:
+                cache[count] = price_list[count]
+                return cache[count]
+            # cache에 이미 값이 저장되어 있는 경우
+            if count in cache:
+                return cache[count]
+            # cache에 값이 없는 경우
+            # cache[count]의 초기값 설정
+            if count < len(price_list):
+                cache[count] = price_list[count]
+            else:
+                cache[count] = 0
+            # cache[count]의 최댓값 구하기
+            i = 1
+            while i <= count // 2:
+                temp = max_profit_memo(price_list, count-i, cache) + max_profit_memo(price_list, i, cache)
+                if temp > cache[count]:
+                    cache[count] = temp
+                i += 1
+            return cache[count]
+        def max_profit(price_list, count):
+            max_profit_cache = {}
 
-
+            return max_profit_memo(price_list, count, max_profit_cache)
+    - 예시) 새콤달콤 판매 최대 이득 구하기 : Tabulation
+        (인풋)
+            price_list: 개수별 가격이 정리되어 있는 리스트
+            count: 판매할 새꼼달꼼 개수
+        def max_profit(price_list, count):
+            # 개수별로 가능한 최대 수익을 저장하는 리스트
+            # 새꼼달꼼 0개면 0원
+            profit_table = [0]
+            # 개수 1부터 count까지 계산하기 위해 반복문
+            for i in range(1, count + 1):
+                # profit은 count개를 팔아서 가능한 최대 수익을 저장하는 변수
+                # 팔려고 하는 총개수에 대한 가격이 price_list에 있으면 일단 그 가격으로 설정
+                # 팔려고 하는 총개수에 대한 가격이 price_list에 없으면 일단 0으로 설정
+                if i < len(price_list):
+                    profit = price_list[i]
+                else:
+                    profit = 0
+                # count개를 팔 수 있는 조합들을 비교해서, 가능한 최대 수익을 찾는다
+                for j in range(1, i // 2 + 1):
+                    profit = max(profit, profit_table[j] + profit_table[i - j])
+                profit_table.append(profit)
+            return profit_table[count]
 
 
