@@ -973,7 +973,7 @@
             for i in range(len(sorted_list)):
                 total_fee += sorted_list[i] * (len(sorted_list) - i)
             return total_fee
-
+    - 예시3)
 
 
 

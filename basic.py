@@ -1,7 +1,7 @@
 # 알고리즘
 
 def course_selection(course_list):
-    # 코드를 작성하세요.
+
 
 
 # 테스트
