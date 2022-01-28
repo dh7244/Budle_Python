@@ -928,3 +928,54 @@
             return profit_table[count]
 
 
+4) Greedy Algorithm
+    - 미래를 내다보지 않고 당장 눈 앞에 보이는 최적의 선택을 하는 방식
+    - 장단점
+        - 장점 : 구현이 쉽다. 간단하고 빠르다.
+        - 단점 : 최적의 답이 보장되지 않는다.
+    - Greedy Algorithm은 언제 사용할까?
+        - 다른 알고리즘이 너무 느려서 사용할 수 없을 때
+        - 최적의 답까지는 필요 없을 때.
+        - Greedy Algorithm이 최적의 답을 구해주는 경우도 있다.
+    - Greedy Algorithm이 최적의 답을 구해주는 경우
+        - 최적 부분 구조(Optimal Subproblems) : 부분 문제들의 최적의 답을 이용해서 기존 문제의 최적의 답을 구할 수 있는 경우
+        - 탐욕적 선택 속성(Greedy Choice Property) : 각 단계에서의 탐욕적 선택이 최종 답을 구하기 위한 최적의 선택인 경우
+        - 예시) 가장 적은 수의 동전을 사용해서 거스름돈 주기
+            - 최적 부분 구조 : 1700원을 거슬러 주는 경우 1200원+500원, 1600원+100원, 1650원+50원, 1690원+10원의 부분 문제들의
+                             최적의 답을 이용해서 원래 문제의 최적의 답을 구할 수 있다.
+            - 탐욕적 선택 속성 : 매 단계에서 가능한 큰 동전을 주는 게 좋다.
+            def min_coin_count(value, coin_list):
+                # 누적 동전 개수
+                count = 0
+                # coin_list의 값들을 큰 순서대로 본다
+                for coin in sorted(coin_list, reverse=True):
+                    # 현재 동전으로 몇 개 거슬러 줄 수 있는지 확인한다
+                    count += (value // coin)
+                    # 잔액을 계산한다
+                    value %= coin
+                return count
+    - 예시) 3개의 수 중 1개의 수씩 뽑아 곱할 때, 가능한 최대 곱을 리턴
+        def max_product(card_lists):
+            # 누적된 곱을 저장하는 변수
+            product = 1
+            # 반복문을 돌면서 카드 뭉치를 하나씩 본다
+            for card_list in card_lists:
+                # product에 각 뭉치의 최댓값을 곱해 준다
+                product *= max(card_list)
+            return product
+    - 예시2) 지각 벌금 적게 내기
+        def min_fee(pages_to_print):
+            # 인풋으로 받은 리스트를 정렬시켜 준다
+            sorted_list = sorted(pages_to_print)
+            # 총 벌금을 담을 변수
+            total_fee = 0
+            # 정렬된 리스트에서 총 벌금 계산
+            for i in range(len(sorted_list)):
+                total_fee += sorted_list[i] * (len(sorted_list) - i)
+            return total_fee
+
+
+
+
+
+
